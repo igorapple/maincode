@@ -1,17 +1,15 @@
-#include <ESP8266WiFi.h> //provides us the methods to connect to a WiFi network.
+#include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <ArduinoJson.h>
 #include <FS.h>
-
-#define DBG_OUTPUT_PORT Serial
 
 ESP8266WebServer server;
 int LED = 2;
 char* ssid = "DOMEK";
 char* password = "Kondominium12";
 
-int ledpin = 2; // D1(gpio5)
-int button = 4; //D2(gpio4)
+int ledpin = 2;
+int button = 4;
 int buttonState=0;
 
 int deviceid=4;
@@ -76,9 +74,8 @@ void setup()
        idki.add(y);
        komendy.add(x);
     }
-    
     char jsonchar[300];
-    json.printTo(jsonchar); //print to char array, takes more memory but sends in one piece
+    json.printTo(jsonchar);
     server.send(200, "application/json", jsonchar);
   });
   
@@ -89,9 +86,9 @@ void setup()
     while (dir.next()) {    
       String fileName = dir.fileName();
       size_t fileSize = dir.fileSize();
-      DBG_OUTPUT_PORT.printf("FS File: %s, size: %s\n", fileName.c_str(), formatBytes(fileSize).c_str());
+      Serial.printf("FS File: %s, size: %s\n", fileName.c_str(), formatBytes(fileSize).c_str());
     }
-  DBG_OUTPUT_PORT.printf("\n");
+  Serial.printf("\n");
   
 }
 
