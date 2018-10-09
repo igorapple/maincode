@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />	
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css"
+	link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Rammetto+One" rel="stylesheet" />
+	<title> Panel Sterowania </title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&amp;subset=latin-ext" rel="stylesheet">	
+</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="logo">
+				<span style="vertical-align: middle";>Skonfiguruj swoje płytki ESP</span>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div class="nav">
+			<ol>
+				<li><a href="index.html" id="informacje">Informacje</a></li>
+				<li><a href="konfiguruj.html" id="konfiguruj">Konfiguruj</a></li>
+				<li><a href="komendy_plytki.html" id="komendy">Komendy płytki</a></li>
+				<li><a href="steruj.html" id="steruj">Steruj</a></li>
+			</ol>
+		</div>
+		<div id="content">
+			<p>Komendy w płytce to:</p>
+			<div id="wszystkie"></div>
+		</div>
+	</div>
+<script>
+	var tabcom=[];
+	function g(i) { return document.getElementById(i) };
+	function transmit(f) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("POST", "/data");
+			xmlhttp.send(f ? (new FormData(f)) : "");
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState === XMLHttpRequest.DONE && xmlhttp.status === 200) {
+					var data = JSON.parse(xmlhttp.responseText);
+					for (i =0; i<10;i++){
+						if (data.commands[i]==0){
+							break;
+						}
+						tabcom[i]=data.commands[i];
+					}
+					g("wszystkie").innerHTML = tabcom;
+					xmlhttp = null;
+				}
+			}
+	}
+	transmit();
+	</script>
+</body>
+</html>

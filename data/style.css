@@ -1,0 +1,178 @@
+body
+{
+	background-color: white;
+	color: black;
+	font-size: 40px;
+	font-family: 'Roboto', sans-serif;
+	margin: 0 !important;
+}
+
+.wrapper
+{
+	width: 100%;
+}
+
+.header
+{
+	width:100%;
+	padding: 20px 0;
+}
+
+.logo
+{
+	font-weight: 100;
+	max-width: 50%;
+	font-size: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 120px;
+	text-align: center;
+	padding top: 10px;
+}
+
+.nav
+{ 
+
+	-webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+	font-weight:300;
+	width: 100%;
+	padding: 0 0;
+	background-color: #1973BE;
+	text-align: center;
+}
+
+#content
+{
+	font-weight: 100;
+	width: 90%;
+	font-size: 23px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: justify;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.bloki
+{
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	float: left;
+}
+.informacje
+{
+	display: inline;
+}
+
+.wyniki
+{
+	font-size:16px;
+}
+
+.konfiguracjabutton
+{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	-webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+	background-color: #1973BE;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	border-radius: 2px;
+	height: 22px;
+}
+.konfiguracjabutton:hover{
+	background-color: white;
+	color: #1973BE;
+}
+.sticky
+{
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}
+
+ol
+{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-size: 20px;
+	height: 40px;
+	line-height: 50px;
+	display: inline-block;
+}
+
+ol a
+{
+	color: white;
+	text-decoration: none;
+	display: block;
+}
+
+ol > li
+{
+	float: left;
+	width: 150px;
+	height: 50px;
+}
+
+ol > li:hover
+{
+	background-color: white;
+	height: 48px;
+	border-top: 1px solid #1973BE;
+	border-bottom: 1px solid #1973BE;
+}
+
+ol > li:hover > a
+{
+	color: black;
+}
+
+ol > li > ul
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	height: 40px;
+	display: none;
+}
+
+ol > li:hover > ul
+{
+	display: block;
+}
+
+ol > li > ul > li
+{
+	background-color:#1973BE;
+	position: relative;
+	top: -2px;
+	z-index: 100;
+}
+
+ol > li > ul > li:hover
+{
+	background-color: white;
+	border: 1px solid #1973BE;
+	height: 48px;
+
+}
+
+ol > li > ul > li > firstchild:hover 
+{
+	top: -2px;
+}
+ol > li > ul > li:hover > a
+{
+	color: black;
+}
