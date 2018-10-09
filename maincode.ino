@@ -1,4 +1,4 @@
-#include <ESP8266WiFi.h> //provides us the methods to connect to a WiFi network.
+#include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <ArduinoJson.h>
 #include <FS.h>
@@ -8,8 +8,8 @@ int LED = 2;
 char* ssid = "DOMEK";
 char* password = "Kondominium12";
 
-int ledpin = 2; // D1(gpio5)
-int button = 4; //D2(gpio4)
+int ledpin = 2;
+int button = 4;
 int buttonState=0;
 
 int deviceid=4;
@@ -66,17 +66,17 @@ void setup()
     JsonObject &json = jsonBuffer.createObject();
     json["myid"] = deviceid;
     json["purpose"] = devicepurpose;
-    JsonArray& idki = json.createNestedArray("id");
-    JsonArray& komendy = json.createNestedArray("commands");
+    JsonArray& idarray = json.createNestedArray("id");
+    JsonArray& commandsarray = json.createNestedArray("commands");
     for (int i = 0; i < 10; i++) {
        int y=connectedid[i];
        int x=commands[i];
-       idki.add(y);
-       komendy.add(x);
+       idarray.add(y);
+       commandsarray.add(x);
     }
     
     char jsonchar[300];
-    json.printTo(jsonchar); //print to char array, takes more memory but sends in one piece
+    json.printTo(jsonchar);
     server.send(200, "application/json", jsonchar);
   });
   
@@ -95,7 +95,7 @@ void setup()
 
 void loop(){
   server.handleClient();
-   buttonState=digitalRead(button); // put your main code here, to run repeatedly:
+   buttonState=digitalRead(button);
  if (buttonState == 1)
  {
  digitalWrite(ledpin, HIGH); 
@@ -128,13 +128,13 @@ void loadconfig(){
     Serial.println("Failed to parse config file");
   }
   
-  for (int i = 0; i < 10; i++) { //Iterate through results 
-    connectedid[i] = jObject["id"][i];  //Implicit cast 
+  for (int i = 0; i < 10; i++) {
+    connectedid[i] = jObject["id"][i];
     Serial.print(connectedid[i]);
   }
   Serial.println("");
-  for (int i = 0; i < 10; i++) { //Iterate through results 
-    commands[i] = jObject["commands"][i];  //Implicit cast 
+  for (int i = 0; i < 10; i++) {
+    commands[i] = jObject["commands"][i];
     Serial.print(commands[i]);
   }
   Serial.println("");
@@ -148,13 +148,13 @@ void saveconfig(){
   json["myid"]=deviceid;
   json["purpose"]=devicepurpose;
   
-  JsonArray& idki = json.createNestedArray("id");
-  JsonArray& komendy = json.createNestedArray("commands");
+  JsonArray& idarray = json.createNestedArray("id");
+  JsonArray& commandsarray = json.createNestedArray("commands");
   for (int i = 0; i < 10; i++) {
        int y=connectedid[i];
        int x=commands[i];
-       idki.add(y);
-       komendy.add(x);
+       idarray.add(y);
+       commandsarray.add(x);
   }
 
   File configFile = SPIFFS.open("/config.json", "w");
@@ -163,14 +163,14 @@ void saveconfig(){
   }
   
   json.printTo(configFile);
-  Serial.println("zapisano config.json");  
+  Serial.println("Config.json saved");  
   configFile.close();
 }
 
 void showconfigfile(){
   File conf = SPIFFS.open("/config.json", "r");
   if (!conf){
-    Serial.println("file open failed");
+    Serial.println("File open failed");
   }
   size_t size = conf.size();
   if (size > 1024) {
@@ -188,11 +188,11 @@ void showconfigfile(){
     Serial.println("Failed to parse config file");
   }
   
-  for (int i = 0; i < 10; i++) { //Iterate through results 
+  for (int i = 0; i < 10; i++) {
     tab1[i] = jObject["id"][i];
   }
   Serial.println("");
-  for (int i = 0; i < 10; i++) { //Iterate through results 
+  for (int i = 0; i < 10; i++) {
     tab2[i]=(jObject["commands"][i]);
   }
   conf.close();
@@ -200,11 +200,11 @@ void showconfigfile(){
 
 void show(){
   Serial.println(deviceid);
-  for (int i = 0; i < 10; i++) { //Iterate through results 
+  for (int i = 0; i < 10; i++) {
     Serial.print(connectedid[i]);
   }
   Serial.println("");
-  for (int i = 0; i < 10; i++) { //Iterate through results 
+  for (int i = 0; i < 10; i++) {
     Serial.print(commands[i]);
   }
   Serial.println("");
